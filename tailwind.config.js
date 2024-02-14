@@ -8,6 +8,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif']
+      },
+      colors: {
+        TITAN500: '#F2A900',
+        TITAN700: '#F28900',
       }
     },
   },
