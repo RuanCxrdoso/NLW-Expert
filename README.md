@@ -1,6 +1,6 @@
 # Next Level Week - Expert Notes 📚
 ![Project cover](./src/assets/preview.png)
-# Clone da Interface do Spotify 🔊
+# Notas 💭
 
 > ## Descrição 📚
 Um projeto de geração de notas ministrado pela RocketSeat, desenvolvido com React e Vite, é uma aplicação simples e prática que permite aos usuários criar, visualizar e excluir notas de forma eficiente. Os usuários podem adicionar notas manualmente inserindo texto ou usar a transcrição de áudio para criar notas por meio da fala. Com uma interface amigável e responsiva, essa aplicação oferece uma maneira fácil e organizada de gerenciar informações importantes do dia a dia.
