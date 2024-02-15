@@ -43,7 +43,14 @@ export function App() {
   const filteredNotesList = search !== '' ? notes.filter((note) => note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase())) : notes
 
   return (
-    <div className="mx-auto max-w-6xl my-12 space-y-4">
+    <div className="mx-auto max-w-6xl my-12 space-y-4 px-5">
+      <h1 className='text-sm text-slate-400'>
+        by 
+        <a href="https://rcardoso.vercel.app" target='_blank' className='italic hover:text-slate-100 transition-colors duration-300'> Ruan Cardoso </a> 
+        and
+        <a href="https://www.rocketseat.com.br/" target='_blank' className='italic hover:text-slate-100 transition-colors duration-300'> Rocketseat </a>
+        💜
+      </h1>
       <img src={logo} alt="Expert Logo" />
       <form className='w-full'>
         <input 
@@ -56,7 +63,7 @@ export function App() {
 
       <div className='h-px bg-slate-700' />
 
-      <div className='grid grid-cols-3 gap-6 auto-rows-[250px]'>
+      <div className='grid md:grid-cols-3 gap-6 auto-rows-[250px]'>
         <NewNoteCard onNoteCreated={onNoteCreated} />
 
         {
