@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './app'
+import { App } from './app.tsx'
 import { Toaster } from 'sonner'
 import './index.css'
 
