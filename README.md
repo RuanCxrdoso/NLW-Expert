@@ -3,18 +3,18 @@
 </h1>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/RuanCxrdoso/NLW-Notes">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/RuanCxrdoso/NLW-Expert">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/RuanCxrdoso/NLW-Notes">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/RuanCxrdoso/NLW-Expert">
   
-  <a href="https://github.com/RuanCxrdoso/NLW-Notes/commits/main">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RuanCxrdoso/NLW-Notes">
+  <a href="https://github.com/RuanCxrdoso/NLW-Expert/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RuanCxrdoso/NLW-Expert">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
 
-  <a href="https://github.com/RuanCxrdoso/NLW-Notes/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/RuanCxrdoso/NLW-Notes?style=social">
+  <a href="https://github.com/RuanCxrdoso/NLW-Expert/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/RuanCxrdoso/NLW-Expert?style=social">
   </a>
 </p>
 
@@ -70,10 +70,10 @@ Passo a passo para clonar e executar a aplicação na sua máquina:
 
 ```bash
 # Clone este repositório
-$ git clone git@github.com:RuanCxrdoso/NLW-Notes.git
+$ git clone git@github.com:RuanCxrdoso/NLW-Expert.git
 
 # Acesse a pasta do projeto no terminal
-$ cd NLW-Notes
+$ cd NLW-Expert
 
 # Instale as dependências
 $ npm install
@@ -94,13 +94,8 @@ Veja uma demonstração das principais interfaces da aplicação:
 
 ### Preview
 
-<p align="center">
-  <img
-    src=""
-    alt=""
-    width="100%"
-  />
-</p>
+![ExpertNotes](https://github.com/RuanCxrdoso/NLW-Notes/assets/86266893/179c7dea-5989-4152-a461-2906b99d2adb)
+
 
 ---
 
