@@ -94,8 +94,7 @@ Veja uma demonstração das principais interfaces da aplicação:
 
 ### Preview
 
-![ExpertNotes](https://github.com/RuanCxrdoso/NLW-Notes/assets/86266893/179c7dea-5989-4152-a461-2906b99d2adb)
-
+![ExpertNotes](https://github.com/RuanCxrdoso/NLW-Expert/assets/86266893/549d967e-97e3-4ec2-8425-6d4a9b92c464)
 
 ---
 
