@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import logo from './assets/logo-nlw-expert.svg'
 import { NewNoteCard } from './components/NewNoteCard'
 import { NoteCard } from './components/NoteCard'
+import { toast } from 'sonner'
 
 interface Note {
   id: string,
@@ -37,11 +38,27 @@ export function App() {
   }
 
   function onNoteDeleted(id: string) {
-    const notesArray =  notes.filter((note) => {
-      return note.id !== id
-    })
 
-    setNotes(notesArray)
+    const confirmDelete = window.confirm("Deseja apagar essa nota?")
+
+    if (confirmDelete) {
+      const notesArray = notes.filter((note) => {
+        return note.id !== id
+      })
+
+      setNotes(notesArray)
+    } else {
+      return
+    }
+  }
+
+  function onShareNote(id: string) {
+    navigator.clipboard.writeText(window.location.href + id);
+    toast.success('Nota copiada com sucesso!')
+  }
+
+  function onEditNote(id: string) {
+    alert("Em breve...")
   }
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
@@ -53,15 +70,15 @@ export function App() {
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-4 px-5">
       <h1 className='text-sm text-slate-400'>
-        by 
-        <a href="https://rcardoso.vercel.app" target='_blank' className='italic hover:text-slate-100 transition-colors duration-300'> Ruan Cardoso </a> 
+        by
+        <a href="https://rcardoso.vercel.app" target='_blank' className='italic hover:text-slate-100 transition-colors duration-300'> Ruan Cardoso </a>
         and
         <a href="https://www.rocketseat.com.br/" target='_blank' className='italic hover:text-slate-100 transition-colors duration-300'> Rocketseat </a>
         💜
       </h1>
       <img src={logo} alt="Expert Logo" />
       <form className='w-full'>
-        <input 
+        <input
           type="text"
           placeholder='Busque em suas notas...'
           className='w-full bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-slate-500'
@@ -77,7 +94,7 @@ export function App() {
         {
           filteredNotesList.map((note) => {
             return (
-              <NoteCard key={note.id} note={note}  onNoteDeleted={onNoteDeleted}/>
+              <NoteCard key={note.id} note={note} onNoteDeleted={onNoteDeleted} onShareNote={onShareNote} onEditNote={onEditNote} />
             )
           })
         }
