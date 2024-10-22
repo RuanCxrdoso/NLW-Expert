@@ -12,7 +12,6 @@ interface Note {
 
 export function App() {
   const [search, setSearch] = useState('')
-
   const [notes, setNotes] = useState<Note[]>(() => {
     const notesOnStorage = localStorage.getItem('notes')
 
@@ -33,32 +32,30 @@ export function App() {
     const notesArray = [newNote, ...notes]
 
     setNotes(notesArray)
-
     localStorage.setItem('notes', JSON.stringify(notesArray))
   }
 
   function onNoteDeleted(id: string) {
-
     const confirmDelete = window.confirm("Deseja apagar essa nota?")
 
     if (confirmDelete) {
-      const notesArray = notes.filter((note) => {
-        return note.id !== id
-      })
-
+      const notesArray = notes.filter((note) => note.id !== id)
       setNotes(notesArray)
-    } else {
-      return
+      localStorage.setItem('notes', JSON.stringify(notesArray))
     }
   }
 
   function onShareNote(id: string) {
-    navigator.clipboard.writeText(window.location.href + id);
+    navigator.clipboard.writeText(window.location.href + id)
     toast.success('Nota copiada com sucesso!')
   }
 
-  function onEditNote(id: string) {
-    alert("Em breve...")
+  function onUpdateNoteContent(id: string, newContent: string) {
+    const updatedNotes = notes.map(note =>
+      note.id === id ? { ...note, content: newContent } : note
+    )
+    setNotes(updatedNotes)
+    localStorage.setItem('notes', JSON.stringify(updatedNotes))
   }
 
   function handleSearch(ev: ChangeEvent<HTMLInputElement>) {
@@ -91,13 +88,9 @@ export function App() {
       <div className='grid md:grid-cols-3 gap-6 auto-rows-[250px]'>
         <NewNoteCard onNoteCreated={onNoteCreated} />
 
-        {
-          filteredNotesList.map((note) => {
-            return (
-              <NoteCard key={note.id} note={note} onNoteDeleted={onNoteDeleted} onShareNote={onShareNote} onEditNote={onEditNote} />
-            )
-          })
-        }
+        {filteredNotesList.map((note) => (
+          <NoteCard key={note.id} note={note} onNoteDeleted={onNoteDeleted} onShareNote={onShareNote} onUpdateNoteContent={onUpdateNoteContent} />
+        ))}
       </div>
     </div>
   )

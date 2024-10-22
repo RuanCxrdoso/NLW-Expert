@@ -1,7 +1,6 @@
-import * as Dialog from '@radix-ui/react-dialog'
+import { useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { X } from 'lucide-react'
 
 export interface NoteCardProps {
   note: {
@@ -11,59 +10,69 @@ export interface NoteCardProps {
   },
   onNoteDeleted: (id: string) => void
   onShareNote: (id: string) => void
-  onEditNote: (id: string) => void
+  onUpdateNoteContent: (id: string, newContent: string) => void
 }
 
-export function NoteCard({ note, onNoteDeleted, onShareNote, onEditNote }: NoteCardProps) {
+export function NoteCard({ note, onNoteDeleted, onShareNote, onUpdateNoteContent }: NoteCardProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedContent, setEditedContent] = useState(note.content)
+
+  function handleSaveEdit() {
+    onUpdateNoteContent(note.id, editedContent)
+    setIsEditing(false)
+  }
+
   return (
-    <Dialog.Root>
-      <Dialog.Trigger className='relative rounded-md text-left bg-slate-800 p-5 gap-3 overflow-hidden outline-none flex flex-col hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-TITAN500'>
+    <div className='relative rounded-md text-left bg-slate-800 p-5 gap-3 overflow-hidden outline-none flex flex-col justify-between hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible:ring-TITAN500 h-full'>
+      <div>
         <span className='text-sm font-medium text-slate-300'>
           {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })}
         </span>
-        <p className='text-sm leading-6 text-slate-400'>
-          {note.content}
-        </p>
-        <div className='absolute right-0 left-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none' />
-      </Dialog.Trigger>
 
-      <Dialog.Portal>
-        <Dialog.Overlay className='inset-0 fixed bg-black/50' />
-        <Dialog.Content className='fixed inset-0 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-[640px] w-full md:h-[60vh] bg-slate-700 md:rounded-md flex flex-col outline-none overflow-hidden'>
-          <div className='flex flex-1 flex-col gap-3 p-5 relative'>
-            <span className='text-sm font-medium text-slate-300'>
-              {formatDistanceToNow(note.date, { locale: ptBR, addSuffix: true })}
-            </span>
-            <p className='text-sm leading-6 text-slate-400'>
-              {note.content}
-            </p>
-            <Dialog.Close className='absolute right-0 top-0 bg-slate-800 p-1.5 text-slate-400 hover:text-slate-100 transition-colors duration-300'>
-              <X className='size-5' />
-            </Dialog.Close>
-          </div>
+        {isEditing ? (
+          <textarea
+            className='bg-transparent text-sm leading-6 text-slate-400 outline-none w-full resize-none mt-3'
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+          />
+        ) : (
+          <p className='text-sm leading-6 text-slate-400 mt-3'>
+            {note.content}
+          </p>
+        )}
+      </div>
 
+      <div className='flex justify-between items-end mt-4'>
+        {isEditing ? (
           <button
-            type='button'
-            className='group w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none'
-            onClick={() => onNoteDeleted(note.id)}
+            className='text-yellow-400 hover:underline'
+            onClick={handleSaveEdit}
           >
-            Deseja <span className='text-red-400 group-hover:underline'>apagar essa nota</span>?
+            Salvar
           </button>
+        ) : (
           <button
-            type='button'
-            className='group w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none'
-            onClick={() => onEditNote(note.id)}
+            className='text-yellow-400 hover:underline'
+            onClick={() => setIsEditing(true)}
           >
-            Deseja <span className='text-yellow-400 group-hover:underline'>editar essa nota</span>?
-          </button>          <button
-            type='button'
-            className='group w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none'
-            onClick={() => onShareNote(note.id)}
-          >
-            Deseja <span className='text-green-400 group-hover:underline'>compartilhar essa nota</span>?
+            Editar
           </button>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+        )}
+
+        <button
+          className='text-red-400 hover:underline'
+          onClick={() => onNoteDeleted(note.id)}
+        >
+          Apagar
+        </button>
+
+        <button
+          className='text-green-400 hover:underline'
+          onClick={() => onShareNote(note.id)}
+        >
+          Compartilhar
+        </button>
+      </div>
+    </div>
   )
 }
